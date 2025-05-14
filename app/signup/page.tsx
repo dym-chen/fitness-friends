@@ -26,7 +26,7 @@ export default function SignUp() {
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
-          providers={["google"]}
+          providers={[]}
           redirectTo={`${window.location.origin}/dashboard`}
           view="sign_up"
         />

@@ -32,7 +32,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Track Workouts</h3>
           <p className="text-gray-600">
@@ -49,6 +49,24 @@ export default function Home() {
           <h3 className="text-xl font-semibold mb-4">Social Features</h3>
           <p className="text-gray-600">
             Connect with friends and share your fitness journey
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold mb-4">Join Online Classes</h3>
+          <p className="text-gray-600">
+            Create or participate in online fitness classes with others
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold mb-4">Discover New Recipes</h3>
+          <p className="text-gray-600">
+            Post your favorite recipes and discover new ones from other users
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold mb-4">Join Fitness Groups</h3>
+          <p className="text-gray-600">
+            Discover and join groups with similar fitness goals
           </p>
         </div>
       </div>

@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { User } from "@supabase/supabase-js";
+import { HorizontalSeparator } from "../components/ui_elements";
+import { MacroBox } from "../components/macro_box";
+import { DailyBox } from "../components/daily_box";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
@@ -104,7 +107,78 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
+
+            {/* Online Classes Tracking Card */}
+            <div className="bg-white overflow-hidden shadow rounded-lg">
+              <div className="p-6">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Join Classes
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  View available online fitness classes
+                </p>
+                <div className="mt-4">
+                  <Link
+                    href="/dashboard/workout"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    View Classes
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Workout Tracking Card */}
+            <div className="bg-white overflow-hidden shadow rounded-lg">
+              <div className="p-6">
+                <h3 className="text-lg font-medium text-gray-900">
+                  View Recipe Board
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Post and view recipes from others
+                </p>
+                <div className="mt-4">
+                  <Link
+                    href="/dashboard/workout"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    View Recipe Board
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Workout Tracking Card */}
+            <div className="bg-white overflow-hidden shadow rounded-lg">
+              <div className="p-6">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Join a Community
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Create or join a community of fitness enthusiasts
+                </p>
+                <div className="mt-4">
+                  <Link
+                    href="/dashboard/workout"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    View Communities
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <HorizontalSeparator />
+
+        <div className="space-y-4">
+          <div className="flex "></div>
+          <div className="grid grid-cols-2 gap-6">
+            <DailyBox />
+            <MacroBox />
+          </div>
+          <div className="grid grid-cols-3 gap-6"></div>
         </div>
       </main>
     </div>
