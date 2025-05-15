@@ -6,6 +6,11 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function SignUp() {
+  const redirectTo =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/dashboard`
+      : undefined;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
@@ -27,7 +32,7 @@ export default function SignUp() {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={[]}
-          redirectTo={`${window.location.origin}/dashboard`}
+          redirectTo={redirectTo}
           view="sign_up"
         />
       </div>

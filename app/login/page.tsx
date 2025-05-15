@@ -6,8 +6,13 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function Login() {
+  const redirectTo =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/dashboard`
+      : undefined;
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen  flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -27,7 +32,7 @@ export default function Login() {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo={`${window.location.origin}/dashboard`}
+          redirectTo={redirectTo}
         />
       </div>
     </div>
