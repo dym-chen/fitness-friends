@@ -1,15 +1,16 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function Login() {
-  const redirectTo =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/dashboard`
-      : undefined;
+  const [redirectTo, setRedirectTo] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setRedirectTo(`${window.location.origin}/dashboard`);
+  }, []);
 
   return (
     <div className="min-h-screen  flex items-center justify-center bg-gray-100">
