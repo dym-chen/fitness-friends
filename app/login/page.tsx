@@ -12,6 +12,8 @@ export default function Login() {
     setRedirectTo(`${window.location.origin}/dashboard`);
   }, []);
 
+  console.log("Redirect URL:", redirectTo);
+
   return (
     <div className="min-h-screen  flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
@@ -33,7 +35,7 @@ export default function Login() {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo={redirectTo}
+          redirectTo={`${window.location.origin}/dashboard`}
         />
       </div>
     </div>
