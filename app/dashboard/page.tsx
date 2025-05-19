@@ -66,7 +66,7 @@ export default function Dashboard() {
           <div className="flex "></div>
           <div className="grid grid-cols-2 gap-6">
             <DailyBox userId={user?.id} />
-            <MacroBox />
+            <MacroBox userId={user?.id} />
           </div>
           <div className="grid grid-cols-3 gap-6">
             <DashboardLineChart userId={user?.id} />

@@ -2,6 +2,8 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
 import { useEffect, useState } from "react";
 import { getNutritionEntries } from "@/lib/nutrition_entries";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag, faUtensils, faFire } from "@fortawesome/free-solid-svg-icons";
 
 Chart.register(ArcElement, Tooltip);
 
@@ -17,10 +19,8 @@ export const DailyBox = ({ userId }: DailyBoxProps) => {
 
   useEffect(() => {
     async function fetchEntries() {
-      const temp = userId ? await getNutritionEntries(userId) : []; // add created today filter
-      console.log("Fetched data:", temp);
+      const temp = userId ? await getNutritionEntries(userId) : [];
       const data = temp?.[0];
-
       if (!data) {
         console.error("No data found");
         return;
@@ -34,13 +34,11 @@ export const DailyBox = ({ userId }: DailyBoxProps) => {
     fetchEntries();
   }, [userId]);
 
-  console.log(remaining);
-
   const data = {
     datasets: [
       {
         data: [100 - (remaining / goal) * 100, (remaining / goal) * 100],
-        backgroundColor: ["#4ade80", "#e5e7eb"], // green and light gray
+        backgroundColor: ["#4ade80", "#e5e7eb"],
         borderWidth: 0,
         cutout: "80%",
       },
@@ -56,29 +54,59 @@ export const DailyBox = ({ userId }: DailyBoxProps) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 flex flex-col">
-      <h2 className="text-lg font-semibold text-gray-800">Calories</h2>
-      <p className="text-m text-gray-600 mb-2">
+    <div className="bg-white shadow-md rounded-lg p-6 flex flex-col">
+      <h2 className="text-xl font-bold text-gray-800 mb-1">Calories</h2>
+      <p className="text-m text-gray-500 mb-6">
         Remaining = Goal - Food + Exercise
       </p>
-      <div className="flex items-center justify-between mb-4 mt-2">
-        <div className="relative w-30 h-30">
-          <Doughnut data={data} options={options} />
-          <div className="absolute inset-0 flex items-center justify-center flex-col ">
-            <h2 className="text-3xl font-bold">{remaining.toFixed(0)}</h2>
-            <p className="text-sm">remaining</p>
+      <div className="flex items-center justify-between">
+        {/* Left: Doughnut Chart */}
+        <div className="flex flex-col items-center justify-center w-1/3">
+          <div className="relative w-32 h-32">
+            <Doughnut data={data} options={options} />
+            <div className="absolute inset-0 flex items-center justify-center flex-col">
+              <h3 className="text-2xl font-bold text-gray-800">
+                {remaining.toFixed(2)}
+              </h3>
+              <p className="text-sm font-medium text-gray-500">Remaining</p>
+            </div>
           </div>
         </div>
-        <div>
-          <p className="text-m text-gray-600 mb-2">
-            Goal: {goal.toFixed(0)} kcal
-          </p>
-          <p className="text-m text-gray-600 mb-2">
-            Food: {food.toFixed(0)} kcal
-          </p>
-          <p className="text-m text-gray-600 mb-2">
-            Exercise: {exercise.toFixed(0)} kcal
-          </p>
+        {/* Right: Details with Icons */}
+        <div className="flex flex-col gap-4 pl-8">
+          <div className="flex items-center gap-3">
+            <FontAwesomeIcon icon={faFlag} className="text-gray-600 w-6 h-6" />
+            <div className="flex flex-col justify-center">
+              <span className="text-gray-600 text-sm">Base Goal</span>
+              <span className="font-bold text-lg text-gray-900">
+                {goal.toFixed(2)}
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <FontAwesomeIcon
+              icon={faUtensils}
+              className="text-blue-500 w-6 h-6"
+            />
+            <div className="flex flex-col justify-center">
+              <span className="text-gray-600 text-sm">Food</span>
+              <span className="font-bold text-lg text-gray-900">
+                {food.toFixed(0)}
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <FontAwesomeIcon
+              icon={faFire}
+              className="text-orange-500 w-6 h-6"
+            />
+            <div className="flex flex-col justify-center">
+              <span className="text-gray-600 text-sm">Exercise</span>
+              <span className="font-bold text-lg text-gray-900">
+                {exercise.toFixed(0)}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
