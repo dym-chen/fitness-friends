@@ -31,6 +31,9 @@ export const MacroBox = ({ userId }: MacroBoxProps) => {
       setProteinConsumed(data.protein || 0);
       setCarbsConsumed(data.carbs || 0);
       setFatConsumed(data.fat || 0);
+      setProteinGoal(150);
+      setCarbsGoal(200);
+      setFatGoal(65);
     }
     fetchEntries();
   }, [userId]);
