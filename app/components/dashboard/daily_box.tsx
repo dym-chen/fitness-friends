@@ -1,7 +1,8 @@
+"use client";
+
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { useEffect, useState } from "react";
-import { getNutritionEntries } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/lib/nutrition_entries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faUtensils, faFire } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,30 +10,17 @@ Chart.register(ArcElement, Tooltip);
 
 interface DailyBoxProps {
   userId: string | undefined;
+  entries: INutritionEntry[] | [];
 }
 
-export const DailyBox = ({ userId }: DailyBoxProps) => {
-  const [goal, setGoal] = useState<number>(0);
-  const [remaining, setRemaining] = useState<number>(0);
-  const [food, setFood] = useState<number>(0);
-  const [exercise, setExercise] = useState<number>(0);
+export const DailyBox = ({ userId, entries }: DailyBoxProps) => {
+  const entry = entries && entries.length > 0 ? entries[0] : null;
+  const goal = entry?.goal ?? 0;
+  const food = entry?.cal_food ?? 0;
+  const exercise = entry?.cal_exercise ?? 0;
+  const remaining = goal - food + exercise;
 
-  useEffect(() => {
-    async function fetchEntries() {
-      const temp = userId ? await getNutritionEntries(userId) : [];
-      const data = temp?.[0];
-      if (!data) {
-        console.error("No data found");
-        return;
-      }
-      const { goal, cal_food, cal_exercise } = data;
-      setGoal(goal);
-      setFood(cal_food);
-      setExercise(cal_exercise);
-      setRemaining(goal - cal_food + cal_exercise);
-    }
-    fetchEntries();
-  }, [userId]);
+  console.log(userId);
 
   const data = {
     datasets: [

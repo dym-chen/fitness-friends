@@ -1,5 +1,7 @@
-import { getNutritionEntries, INutritionEntry } from "@/lib/nutrition_entries";
-import { useEffect, useState } from "react";
+"use client";
+
+import { INutritionEntry } from "@/lib/nutrition_entries";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart,
@@ -23,6 +25,7 @@ Chart.register(
 
 interface DashboardLineChartProps {
   userId: string | undefined;
+  entries: INutritionEntry[] | [];
 }
 
 const metrics = [
@@ -34,8 +37,10 @@ const metrics = [
 
 type MetricKey = (typeof metrics)[number]["key"];
 
-export const DashboardLineChart = ({ userId }: DashboardLineChartProps) => {
-  const [entries, setEntries] = useState<INutritionEntry[]>([]);
+export const DashboardLineChart = ({
+  userId,
+  entries,
+}: DashboardLineChartProps) => {
   const [enabled, setEnabled] = useState<Record<MetricKey, boolean>>({
     calories: true,
     protein: false,
@@ -43,13 +48,7 @@ export const DashboardLineChart = ({ userId }: DashboardLineChartProps) => {
     carbs: false,
   });
 
-  useEffect(() => {
-    async function fetchEntries() {
-      const data = userId ? await getNutritionEntries(userId) : [];
-      setEntries(data || []);
-    }
-    fetchEntries();
-  }, [userId]);
+  console.log(userId);
 
   // Prepare last 7 days labels and data
   const today = new Date();

@@ -1,42 +1,26 @@
+"use client";
+
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { useEffect, useState } from "react";
-import { getNutritionEntries } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/lib/nutrition_entries";
 
 Chart.register(ArcElement, Tooltip);
 
 interface MacroBoxProps {
   userId: string | undefined;
+  entries: INutritionEntry[] | [];
 }
 
-export const MacroBox = ({ userId }: MacroBoxProps) => {
-  const [proteinGoal, setProteinGoal] = useState<number>(150);
-  const [carbsGoal, setCarbsGoal] = useState<number>(200);
-  const [fatGoal, setFatGoal] = useState<number>(65);
-  const [proteinConsumed, setProteinConsumed] = useState<number>(0);
-  const [carbsConsumed, setCarbsConsumed] = useState<number>(0);
-  const [fatConsumed, setFatConsumed] = useState<number>(0);
+export const MacroBox = ({ userId, entries }: MacroBoxProps) => {
+  const entry = entries && entries.length > 0 ? entries[0] : null;
+  const proteinGoal = 150;
+  const carbsGoal = 200;
+  const fatGoal = 65;
+  const proteinConsumed = entry?.protein ?? 0;
+  const carbsConsumed = entry?.carbs ?? 0;
+  const fatConsumed = entry?.fat ?? 0;
 
-  useEffect(() => {
-    async function fetchEntries() {
-      const temp = userId ? await getNutritionEntries(userId) : [];
-      const data = temp?.[0];
-
-      if (!data) {
-        console.error("No data found");
-        return;
-      }
-
-      // Update these with actual data from your nutrition entries
-      setProteinConsumed(data.protein || 0);
-      setCarbsConsumed(data.carbs || 0);
-      setFatConsumed(data.fat || 0);
-      setProteinGoal(150);
-      setCarbsGoal(200);
-      setFatGoal(65);
-    }
-    fetchEntries();
-  }, [userId]);
+  console.log(userId);
 
   const createMacroData = (consumed: number, goal: number, color: string) => ({
     datasets: [

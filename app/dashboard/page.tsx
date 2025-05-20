@@ -9,9 +9,11 @@ import { DailyBox } from "../components/dashboard/daily_box";
 import { DashboardCalendar } from "../components/dashboard/dash_calendar";
 import { DashboardLineChart } from "../components/dashboard/dash_line";
 import { DashboardGrid } from "../components/dashboard/dash_grid";
+import { getNutritionEntries, INutritionEntry } from "@/lib/nutrition_entries";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
+  const [entries, setEntries] = useState<INutritionEntry[]>([]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -19,6 +21,9 @@ export default function Dashboard() {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
+
+      const data = user ? await getNutritionEntries(user.id) : [];
+      setEntries(data || []);
     };
     getUser();
   }, []);
@@ -65,12 +70,12 @@ export default function Dashboard() {
         <div className="space-y-4">
           <div className="flex "></div>
           <div className="grid grid-cols-2 gap-6">
-            <DailyBox userId={user?.id} />
-            <MacroBox userId={user?.id} />
+            <DailyBox userId={user?.id} entries={entries} />
+            <MacroBox userId={user?.id} entries={entries} />
           </div>
           <div className="grid grid-cols-3 gap-6">
-            <DashboardLineChart userId={user?.id} />
-            <DashboardCalendar />
+            <DashboardLineChart userId={user?.id} entries={entries} />
+            <DashboardCalendar userId={user?.id} entries={entries} />
           </div>
         </div>
       </main>
