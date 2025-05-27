@@ -15,6 +15,16 @@ export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [entries, setEntries] = useState<INutritionEntry[]>([]);
 
+  const getTodayEntries = (entries: INutritionEntry[]) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return entries.filter((entry) => {
+      const entryDate = new Date(entry.created_at);
+      entryDate.setHours(0, 0, 0, 0);
+      return entryDate.getTime() === today.getTime();
+    });
+  };
+
   useEffect(() => {
     const getUser = async () => {
       const {
@@ -70,8 +80,8 @@ export default function Dashboard() {
         <div className="space-y-4">
           <div className="flex "></div>
           <div className="grid grid-cols-2 gap-6">
-            <DailyBox userId={user?.id} entries={entries} />
-            <MacroBox userId={user?.id} entries={entries} />
+            <DailyBox userId={user?.id} entries={getTodayEntries(entries)} />
+            <MacroBox userId={user?.id} entries={getTodayEntries(entries)} />
           </div>
           <div className="grid grid-cols-3 gap-6">
             <DashboardLineChart userId={user?.id} entries={entries} />

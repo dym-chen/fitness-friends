@@ -17,16 +17,21 @@ export type INutritionEntry = {
 export const getNutritionEntries = async (
   userId: string
 ): Promise<INutritionEntry[] | null> => {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - 7); // 7 days ago
+
   const { data, error } = await supabase
     .from("nutrition_entries")
     .select("*")
-    .eq("user_id", userId); // filter by user ID
+    .eq("user_id", userId)
+    .gte("created_at", startDate.toISOString())
+    .lte("created_at", endDate.toISOString());
 
   if (error) {
     console.error("Fetch error:", error.message);
     return null;
   }
 
-  // console.log("Fetched data:", data);
   return data;
 };

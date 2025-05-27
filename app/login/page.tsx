@@ -35,7 +35,7 @@ export default function Login() {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo={`${window.location.origin}/dashboard`}
+          redirectTo={redirectTo}
         />
       </div>
     </div>
