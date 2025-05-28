@@ -9,7 +9,10 @@ import { DailyBox } from "../components/dashboard/daily_box";
 import { DashboardCalendar } from "../components/dashboard/dash_calendar";
 import { DashboardLineChart } from "../components/dashboard/dash_line";
 import { DashboardGrid } from "../components/dashboard/dash_grid";
-import { getNutritionEntries, INutritionEntry } from "@/lib/nutrition_entries";
+import {
+  getNutritionEntries,
+  INutritionEntry,
+} from "@/lib/api/nutrition_entries";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);

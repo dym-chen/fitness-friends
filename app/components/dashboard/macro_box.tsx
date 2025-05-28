@@ -2,7 +2,7 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { INutritionEntry } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/lib/api/nutrition_entries";
 
 Chart.register(ArcElement, Tooltip);
 

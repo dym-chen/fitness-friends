@@ -104,7 +104,7 @@ export const DashboardGrid = () => (
             Join a Community
           </h3>
           <p className="mt-1 text-sm text-gray-500">
-            Create or join a community of fitness enthusiasts
+            Create or join a community to chat and share your progress
           </p>
           <div className="mt-4">
             <Link

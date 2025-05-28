@@ -2,7 +2,7 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { INutritionEntry } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/lib/api/nutrition_entries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faUtensils, faFire } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,8 +25,12 @@ export const DailyBox = ({ userId, entries }: DailyBoxProps) => {
   const data = {
     datasets: [
       {
-        data: [100 - (remaining / goal) * 100, (remaining / goal) * 100],
-        backgroundColor: ["#4ade80", "#e5e7eb"],
+        data:
+          remaining == goal
+            ? [100, 0]
+            : [100 - (remaining / goal) * 100, (remaining / goal) * 100],
+        backgroundColor:
+          remaining == goal ? ["#e5e7eb"] : ["#e5e7eb", "#4ade80"],
         borderWidth: 0,
         cutout: "80%",
       },
