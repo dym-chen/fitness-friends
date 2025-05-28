@@ -14,7 +14,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/workout"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               Log Workout
@@ -32,7 +32,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/nutrition"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               Log Food
@@ -50,7 +50,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/progress"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               View Progress
@@ -68,7 +68,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/workout"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               View Classes
@@ -88,7 +88,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/workout"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               View Recipe Board
@@ -108,7 +108,7 @@ export const DashboardGrid = () => (
           </p>
           <div className="mt-4">
             <Link
-              href="/dashboard/workout"
+              href="/in-progress"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               View Communities
