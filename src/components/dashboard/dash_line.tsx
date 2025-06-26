@@ -1,6 +1,6 @@
 "use client";
 
-import { INutritionEntry } from "@/app/api/nutrition_entries";
+import { INutritionEntry } from "@/lib/nutrition_entries";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {

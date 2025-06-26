@@ -1,4 +1,4 @@
-import { INutritionEntry } from "@/app/api/nutrition_entries";
+import { INutritionEntry } from "@/lib/nutrition_entries";
 
 interface DashboardCalendarProps {
   userId: string | undefined;

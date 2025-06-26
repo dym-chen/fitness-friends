@@ -3,16 +3,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
-import { HorizontalSeparator } from "../components/ui_elements";
-import { MacroBox } from "@/app/components/dashboard/macro_box";
-import { DailyBox } from "@/app/components/dashboard/daily_box";
-import { DashboardCalendar } from "@/app/components/dashboard/dash_calendar";
-import { DashboardLineChart } from "@/app/components/dashboard/dash_line";
-import { DashboardGrid } from "@/app/components/dashboard/dash_grid";
-import {
-  getNutritionEntries,
-  INutritionEntry,
-} from "@/app/api/nutrition_entries";
+import { HorizontalSeparator } from "../../components/ui_elements";
+import { MacroBox } from "@/components/dashboard/macro_box";
+import { DailyBox } from "@/components/dashboard/daily_box";
+import { DashboardCalendar } from "@/components/dashboard/dash_calendar";
+import { DashboardLineChart } from "@/components/dashboard/dash_line";
+import { DashboardGrid } from "@/components/dashboard/dash_grid";
+import { getNutritionEntries, INutritionEntry } from "@/lib/nutrition_entries";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
