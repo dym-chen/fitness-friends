@@ -1,6 +1,6 @@
 "use client";
 
-import { INutritionEntry } from "@/lib/api/nutrition_entries";
+import { INutritionEntry } from "@/app/api/nutrition_entries";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -92,7 +92,7 @@ export const DashboardLineChart = ({
 
   return (
     <div className="bg-white shadow-md rounded-lg p-4 col-span-2">
-      <h2 className="text-lg font-semibold text-gray-800 mb-2">Daily Graph</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-2">Weekly Graph</h2>
       <div className="flex gap-2 mb-4">
         {metrics.map((m) => (
           <button
