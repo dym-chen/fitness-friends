@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
-import { HorizontalSeparator } from "../../components/ui_elements";
+import { HorizontalSeparator } from "@/components/ui_elements";
 import { MacroBox } from "@/components/dashboard/macro_box";
 import { DailyBox } from "@/components/dashboard/daily_box";
 import { DashboardCalendar } from "@/components/dashboard/dash_calendar";
 import { DashboardLineChart } from "@/components/dashboard/dash_line";
 import { DashboardGrid } from "@/components/dashboard/dash_grid";
-import { getNutritionEntries, INutritionEntry } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/types/nutrition";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
@@ -43,7 +43,7 @@ export default function Dashboard() {
     window.location.href = "/";
   };
 
-  if (!user) {
+  if (!user && !entries.length) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <p className="text-lg text-gray-600">Loading...</p>

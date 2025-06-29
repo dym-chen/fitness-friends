@@ -2,7 +2,7 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { INutritionEntry } from "@/lib/nutrition_entries";
+import { INutritionEntry } from "@/lib/nutrition";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faUtensils, faFire } from "@fortawesome/free-solid-svg-icons";
 

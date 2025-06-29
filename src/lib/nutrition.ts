@@ -1,25 +1,15 @@
 import { supabase } from "@/lib/supabase";
-
-export type INutritionEntry = {
-  id: number;
-  user_id: string;
-  created_at: string;
-  updated_at: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  goal: number;
-  cal_food: number;
-  cal_exercise: number;
-};
+import { INutritionEntry } from "@/types/index";
 
 export const getNutritionEntries = async (
-  userId: string
+  userId: string, start?: string, end?: string
 ): Promise<INutritionEntry[] | null> => {
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - 7); // 7 days ago
+  const endDate = end? new Date(end): new Date();
+  const startDate = start ? new Date(start) : new Date();
+  
+  if (!start && !end) { // Default to the last 7 days
+    startDate.setDate(startDate.getDate() - 7); 
+  }
 
   const { data, error } = await supabase
     .from("nutrition_entries")
