@@ -2,7 +2,9 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { INutritionEntry } from "@/lib/nutrition";
+import { INutritionEntry, IUser } from "@/types/index";
+import { useEffect, useState } from "react";
+import { getUserById } from "@/lib/user";
 
 Chart.register(ArcElement, Tooltip);
 
@@ -12,15 +14,26 @@ interface MacroBoxProps {
 }
 
 export const MacroBox = ({ userId, entries }: MacroBoxProps) => {
+  const [appUser, setAppUser] = useState<IUser | null>(null);
   const entry = entries && entries.length > 0 ? entries[0] : null;
-  const proteinGoal = 150;
-  const carbsGoal = 200;
-  const fatGoal = 65;
+  const proteinGoal = appUser?.protein_goal ?? 0;
+  const carbsGoal = appUser?.carb_goal ?? 0;
+  const fatGoal = appUser?.fat_goal ?? 0;
   const proteinConsumed = entry?.protein ?? 0;
   const carbsConsumed = entry?.carbs ?? 0;
   const fatConsumed = entry?.fat ?? 0;
 
-  console.log(userId);
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!userId) {
+        setAppUser(null);
+        return;
+      }
+      const u = await getUserById(userId);
+      setAppUser(u);
+    };
+    fetchUser();
+  }, [userId]);
 
   const createMacroData = (consumed: number, goal: number, color: string) => ({
     datasets: [

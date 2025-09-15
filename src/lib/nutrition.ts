@@ -2,9 +2,12 @@ import { supabase } from "@/lib/supabase";
 import { INutritionEntry } from "@/types/index";
 
 export const getNutritionEntries = async (
-  userId: string, start?: string, end?: string
+  userId: string,
+  start?: string,
+  end?: string
 ) => {
-  let query = supabase.from("nutrition_entries")
+  let query = supabase
+    .from("nutrition_entries")
     .select("*")
     .eq("user_id", userId);
 

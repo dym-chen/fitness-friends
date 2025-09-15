@@ -1,6 +1,6 @@
 "use client";
 
-import { INutritionEntry } from "@/lib/nutrition";
+import { INutritionEntry } from "@/types/index";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -47,8 +47,6 @@ export const DashboardLineChart = ({
     fat: false,
     carbs: false,
   });
-
-  console.log(userId);
 
   // Prepare last 7 days labels and data
   const today = new Date();

@@ -2,7 +2,9 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { INutritionEntry } from "@/lib/nutrition";
+import { INutritionEntry, IUser } from "@/types/index";
+import { useEffect, useState } from "react";
+import { getUserById } from "@/lib/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faUtensils, faFire } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,13 +16,25 @@ interface DailyBoxProps {
 }
 
 export const DailyBox = ({ userId, entries }: DailyBoxProps) => {
+  const [appUser, setAppUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!userId) {
+        setAppUser(null);
+        return;
+      }
+      const u = await getUserById(userId);
+      setAppUser(u);
+    };
+    fetchUser();
+  }, [userId]);
+
   const entry = entries && entries.length > 0 ? entries[0] : null;
-  const goal = entry?.goal ?? 0;
+  const goal = entry?.goal ?? appUser?.cal_goal ?? 0;
   const food = entry?.cal_food ?? 0;
   const exercise = entry?.cal_exercise ?? 0;
   const remaining = goal - food + exercise;
-
-  console.log(userId);
 
   const data = {
     datasets: [
@@ -58,7 +72,7 @@ export const DailyBox = ({ userId, entries }: DailyBoxProps) => {
             <Doughnut data={data} options={options} />
             <div className="absolute inset-0 flex items-center justify-center flex-col">
               <h3 className="text-2xl font-bold text-gray-800">
-                {remaining.toFixed(2)}
+                {remaining.toFixed(0)}
               </h3>
               <p className="text-sm font-medium text-gray-500">Remaining</p>
             </div>

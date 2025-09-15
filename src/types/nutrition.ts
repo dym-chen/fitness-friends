@@ -10,4 +10,15 @@ export interface INutritionEntry {
   goal: number;
   cal_food: number;
   cal_exercise: number;
-};
+}
+
+export interface IUser {
+  id: string;
+  email: string;
+  name: string;
+  created_at: string;
+  cal_goal: number;
+  protein_goal: number;
+  carb_goal: number;
+  fat_goal: number;
+}
