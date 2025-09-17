@@ -22,3 +22,14 @@ export interface IUser {
   carb_goal: number;
   fat_goal: number;
 }
+
+export interface IExercise {
+  id: string;
+  name: string;
+  gifUrl: string;
+  target: string;
+  bodyPart: string;
+  equipment: string;
+  secondaryMuscles: string[];
+  instructions: string[];
+}
