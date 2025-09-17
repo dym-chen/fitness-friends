@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const exercises = await getExercises(keywords, limit);
+
     return NextResponse.json(exercises);
   } catch (error) {
     return NextResponse.json(
